@@ -11,7 +11,9 @@ export class MovieList extends Component {
         {this.props.movies.map(movie => {
           return (
             <h3 key={movie.id} onClick={movieClicked(movie)}>
+              <div className='movie-title'>  
               {movie.title}
+              </div>
             </h3>
           );
         })}

@@ -32,6 +32,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <h1>Movie Rater</h1>
         <div className="layout">
           <MovieList movies={this.state.movies} movieClicked={this.movieClicked} />
           <MovieDetail movie ={this.state.selectedMovie} />
