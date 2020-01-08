@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   text-align: left;
+  grid-gap: 20px;
 }
 
 .black{
@@ -32,4 +33,13 @@
 
 .movie-title{
   cursor: pointer;
+}
+.movie-item{
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+}
+
+.movie-item span{
+  font-size: 1em;
+  margin: 16px 5px;
 }

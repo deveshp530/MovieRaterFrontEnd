@@ -14,12 +14,12 @@ export class MovieDetail extends Component {
 
   rateClicked = stars => e => {
     fetch(
-      `http://localhost:8000/api/movies/${this.props.movie.id}/rate_movie/`,
+      `${process.env.REACT_APP_API_URL}/api/movies/${this.props.movie.id}/rate_movie/`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
+          Authorization: "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
         },
         body: JSON.stringify({
           stars: stars + 1
@@ -27,7 +27,23 @@ export class MovieDetail extends Component {
       }
     )
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => this.getDetails())
+      .catch(err => console.error(err));
+  };
+
+  getDetails = () => {
+    fetch(
+      `${process.env.REACT_APP_API_URL}/api/movies/${this.props.movie.id}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
+        },
+      }
+    )
+      .then(res => res.json())
+      .then(res => this.props.updateMovie(res ))
       .catch(err => console.error(err));
   };
   render() {
@@ -70,7 +86,7 @@ export class MovieDetail extends Component {
                     }
                     onMouseEnter={this.highlightRate(index)}
                     onMouseLeave={this.highlightRate(-1)}
-                    onClick={this.rateClicked(index)}
+                    onClick={this.rateClicked(index)}                   
                   />
                 );
               })}

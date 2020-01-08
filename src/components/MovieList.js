@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+let FontAwesome = require("react-fontawesome");
 
 export class MovieList extends Component {
   render(props) {
@@ -6,17 +7,40 @@ export class MovieList extends Component {
       this.props.movieClicked(movie);
     };
 
+    const deleteMovie = movie => e => {
+      fetch(`${process.env.REACT_APP_API_URL}/api/movies/${movie.id}/`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
+        }
+      })
+        .then(res => this.props.movieDeleted(movie))
+        .catch(err => console.error(err));
+    };
+
+    const editMovie = movie => e => {
+      this.props.editMovie(movie);
+    };
+
+    const addMovie = () =>{
+        this.props.addMovie()
+    }
+
     return (
       <div>
         {this.props.movies.map(movie => {
           return (
-            <h3 key={movie.id} onClick={movieClicked(movie)}>
-              <div className='movie-title'>  
-              {movie.title}
-              </div>
-            </h3>
+            <div key={movie.id} className="movie-item">
+              <h3 onClick={movieClicked(movie)}>
+                <div className="movie-title">{movie.title}</div>
+              </h3>
+              <FontAwesome name="edit" onClick={editMovie(movie)} />
+              <FontAwesome name="trash" onClick={deleteMovie(movie)} />
+            </div>
           );
         })}
+        <button onClick={addMovie}>Add New movie</button>
       </div>
     );
   }
