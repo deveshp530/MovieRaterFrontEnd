@@ -12,7 +12,7 @@ export class MovieList extends Component {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
+          'Authorization': `Token ${this.state.token}`
         }
       })
         .then(res => this.props.movieDeleted(movie))

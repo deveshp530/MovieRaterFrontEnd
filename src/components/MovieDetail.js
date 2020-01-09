@@ -19,7 +19,7 @@ export class MovieDetail extends Component {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
+          'Authorization': `Token ${this.state.token}`
         },
         body: JSON.stringify({
           stars: stars + 1
@@ -38,7 +38,7 @@ export class MovieDetail extends Component {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Token e16b579ed2ac7fe937dc5ea2b8f4882c6e4b2ed8"
+          'Authorization': `Token ${this.state.token}`
         },
       }
     )
